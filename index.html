@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karan Panwar | AI Engineer & Data Scientist</title>
+    <meta name="description"
+        content="Portfolio of Karan Panwar, Data Scientist, AI Engineer, and Researcher based in Cambridge, UK.">
+    <style>
+        /* CSS Reset and Base Styles */
+        :root {
+            --bg-color: #050505;
+            --bg-secondary: #0a0a0f;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-color: #8b5cf6;
+            --accent-light: #a78bfa;
+            --accent-glow: rgba(139, 92, 246, 0.4);
+            --glass-bg: rgba(25, 25, 30, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --font-sans: 'Inter', sans-serif;
+            --font-display: 'Outfit', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-family: var(--font-sans);
+            color: var(--text-primary);
+            background-color: var(--bg-color);
+            overflow-x: hidden;
+        }
+
+        body {
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        p {
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        /* Background Animation Canvas */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        /* Layout Utilities */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(to right, #fff, var(--text-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Glassmorphism Classes */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-glow);
+            box-shadow: 0 10px 40px var(--accent-glow);
+        }
+
+        /* Splash Screen */
+        #splash-screen {
+            position: fixed;
+            inset: 0;
+            background-color: var(--bg-color);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .splash-logo {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-light), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 4px;
+            background: var(--glass-border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .loading-bar .progress {
+            width: 0%;
+            height: 100%;
+            background: var(--accent-color);
+            animation: load 1.2s cubic-bezier(0.8, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes pulse {
+            from {
+                opacity: 0.6;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes load {
+            0% {
+                width: 0%;
+            }
+
+            100% {
+                width: 100%;
+            }
+        }
+
+        /* Navigation */
+        #navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            transition: all 0.3s ease;
+            padding: 1.5rem 0;
+        }
+
+        #navbar.scrolled {
+            padding: 1rem 0;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .nav-links a {
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 5rem;
+        }
+
+        .hero-content {
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+        }
+
+        .hero-text {
+            max-width: 700px;
+        }
+
+        .greeting {
+            font-size: 1.2rem;
+            color: var(--accent-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .name {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+
+        .title {
+            font-size: 2rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .summary {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--text-primary);
+            margin-left: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .hero-cta {
+            display: flex;
+            margin-bottom: 3rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-light);
+        }
+
+        /* Timeline (Experience) */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 20px;
+            height: 100%;
+            width: 2px;
+            background: var(--glass-border);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 60px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 11px;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-color);
+            border: 4px solid var(--bg-color);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-header h3 {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+        }
+
+        .timeline-header h4 {
+            font-size: 1rem;
+            color: var(--accent-light);
+            font-family: var(--font-sans);
+            margin-top: 0.2rem;
+        }
+
+        .date {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .timeline-bullets {
+            list-style: none;
+        }
+
+        .timeline-bullets li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .timeline-bullets li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .tagline {
+            color: var(--accent-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .project-card .desc {
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-stack span {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            padding: 0.3rem 0.8rem;
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--accent-light);
+            border-radius: 20px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        /* Skills section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            text-align: center;
+        }
+
+        .skill-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 12px;
+            color: var(--accent-light);
+        }
+
+        .skill-category h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tags span {
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 6px;
+            color: var(--text-secondary);
+        }
+
+        /* Education & Achievements */
+        .flex-layout {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .edu-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .achievements-column {
+            flex: 1;
+        }
+
+        .edu-card h3 {
+            font-size: 1.2rem;
+        }
+
+        .edu-card h4 {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-family: var(--font-sans);
+            margin-top: 0.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .highlight {
+            color: var(--accent-light);
+        }
+
+        .edu-card .modules {
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .achievements-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-light);
+        }
+
+        .achievements-card ul {
+            list-style: none;
+        }
+
+        .achievements-card li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .achievements-card li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        /* Certificates */
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-link {
+            display: block;
+        }
+
+        .certificate-card {
+            text-align: center;
+            padding: 1.5rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .certificate-card:hover {
+            border-color: var(--accent-light);
+        }
+
+        .cert-icon {
+            width: 55px;
+            height: 55px;
+            margin: 0 auto 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.05));
+            border-radius: 50%;
+            color: var(--accent-light);
+            border: 1px solid var(--glass-border);
+        }
+
+        .certificate-card:hover .cert-icon {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.4), rgba(139, 92, 246, 0.1));
+        }
+
+        .cert-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.4rem;
+            font-size: 1.05rem;
+        }
+
+        .cert-issuer {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-light);
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .flex-layout {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .name {
+                font-size: 3.5rem;
+            }
+
+            .title {
+                font-size: 1.5rem;
+            }
+
+            .timeline-header {
+                flex-direction: column;
+            }
+
+            .date {
+                margin-top: 0.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                transition: none;
+                opacity: 1;
+                transform: none;
+            }
+
+            #bg-canvas {
+                display: none;
+            }
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <div class="splash-logo">KP</div>
+        <div class="loading-bar">
+            <div class="progress"></div>
+        </div>
+    </div>
+
+    <!-- Animated Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">K.P</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#certifications">Certificates</a>
+            </div>
+            <div class="hamburger">
+                <i data-lucide="menu"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="section hero">
+        <div class="container hero-content">
+            <div class="hero-text reveal">
+                <h2 class="greeting">Hello, I'm</h2>
+                <h1 class="name">Karan Panwar</h1>
+                <h3 class="title">Data Scientist / AI Engineer / Researcher</h3>
+                <p class="summary">
+                    Dynamic and result-oriented expert in designing, training, and deploying data-driven intelligent
+                    systems using Machine Learning, Deep Learning, and NLP. Passionate about solving real-world problems
+                    with scalable, ethical AI solutions.
+                </p>
+                <div class="hero-cta">
+                    <a href="#experience" class="btn btn-primary">View Experience <i data-lucide="arrow-right"></i></a>
+                    <a href="data/resume.pdf" target="_blank" class="btn btn-secondary">Download Resume <i
+                            data-lucide="download"></i></a>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/karanpanwar8595" aria-label="GitHub"><i data-lucide="github"></i></a>
+                    <a href="https://www.linkedin.com/in/karan-panwar-1b9b6a26b/" aria-label="LinkedIn"><i
+                            data-lucide="linkedin"></i></a>
+                    <a href="mailto:karanpanwar8595@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Professional Experience</h2>
+            <div class="timeline">
+
+                <!-- Klip Global -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-header">
+                            <div>
+                                <h3>Research Assistant (Generative AI)</h3>
+                                <h4>Klip Global</h4>
+                            </div>
+                            <span class="date"> September 2025 – June 2026
+ | Cambridge, UK</span>
+                        </div>
+                        <ul class="timeline-bullets">
+                            <li>Leading development of Klip Agent, a personalized digital wellbeing platform integrating
+                                LLMs, hybrid recommendation systems, and user behavioral analytics.</li>
+                            <li>Designed a hybrid recommendation engine combining Transformer-based NLP, clustering, and
+                                NHS data integration to deliver evidence-based wellbeing guidance.</li>
+                            <li>Built and deployed an LLM-powered conversational agent using LangChain and Hugging Face
+                                models, improving engagement and response quality.</li>
+                            <li>Engineered scalable backend architecture using Django and integrated with Next.js
+                                frontend frameworks.</li>
+                            <li>Collaborating with cross-functional teams (product, data, and research) to continuously
+                                improve AI model performance and system usability.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- QNN -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-header">
+                            <div>
+                                <h3>Research Assistant – Quantum Neural Networks</h3>
+                                <h4>Anglia Ruskin University</h4>
+                            </div>
+                            <span class="date">Jan 2025 – Apr 2025 | Cambridge, UK</span>
+                        </div>
+                        <ul class="timeline-bullets">
+                            <li>Conducted advanced research on Quantum Neural Networks (QNNs) for pattern recognition
+                                and image classification using Qiskit.</li>
+                            <li>Designed and tested quantum circuits replacing classical layers, achieving a 15%
+                                accuracy boost over CNN baselines.</li>
+                            <li>Authored detailed research documentation and contributed to a university publication on
+                                Quantum Machine Learning.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Selected Projects</h2>
+            <div class="projects-grid">
+
+                <div class="project-card glass-card reveal">
+                    <h3>KpAgent</h3>
+                    <p class="tagline">AI-Powered Career Assistant</p>
+                    <ul class="timeline-bullets" style="padding-left: 0; margin-bottom: 1.5rem;">
+                        <li style="font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--text-secondary);">Developed
+                            comprehensive full-stack career services platform with AI-driven resume analysis and
+                            personalised job recommendations.</li>
+                        <li style="font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--text-secondary);">Engineered
+                            custom interview preparation tool generating role-specific questions based on user profiles.
+                        </li>
+                        <li style="font-size: 0.95rem; color: var(--text-secondary);">Built modern responsive UI,
+                            delivering polished user experience across all devices.</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span>Next.js</span><span>TypeScript</span><span>NLP</span><span>Tailwind</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card reveal" style="transition-delay: 100ms;">
+                    <h3>SmartStock</h3>
+                    <p class="tagline">Financial Forecast Dashboard</p>
+                    <p class="desc">Built an advanced stock prediction dashboard with dynamic time series analysis,
+                        predictive models, and financial sentiment analytics using real-time APIs.</p>
+                    <div class="tech-stack">
+                        <span>Python</span><span>LSTM</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card reveal" style="transition-delay: 200ms;">
+                    <h3>EmotionSense</h3>
+                    <p class="tagline">Real-Time Emotion Recognition</p>
+                    <p class="desc">Created an AI tool detecting facial and vocal emotions with CNN and MFCCs,
+                        recommending personalized media content via adaptive algorithms.</p>
+                    <div class="tech-stack">
+                        <span>OpenCV</span><span>TensorFlow</span><span>Flask</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card reveal">
+                    <h3>SignAI</h3>
+                    <p class="tagline">Sign Language to Text Translator</p>
+                    <p class="desc">Engineered an accessibility-driven system converting sign gestures into English text
+                        with over 95% accuracy using CNN-based visual models.</p>
+                    <div class="tech-stack">
+                        <span>Django</span><span>OpenCV</span><span>Deep Learning</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card reveal">
+                    <h3>Cambridge Culture Portal</h3>
+                    <p class="tagline">Interactive Cultural Platform</p>
+                    <p class="desc">Led a 4-member team developing an interactive cultural platform showcasing Cambridge
+                        events and local communities.</p>
+                    <div class="tech-stack">
+                        <span>Django</span><span>HTML</span><span>CSS</span><span>SQLite</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Core Technical Skills</h2>
+            <div class="skills-grid">
+
+                <div class="skill-category glass-card reveal">
+                    <div class="skill-icon"><i data-lucide="code"></i></div>
+                    <h3>Languages</h3>
+                    <div class="skill-tags">
+                        <span>Python</span><span>JavaScript (TypeScript)</span><span>SQL</span><span>Java</span>
+                    </div>
+                </div>
+
+                <div class="skill-category glass-card reveal">
+                    <div class="skill-icon"><i data-lucide="brain"></i></div>
+                    <h3>Machine Learning</h3>
+                    <div class="skill-tags">
+                        <span>TensorFlow</span><span>PyTorch</span><span>NLP</span><span>Generative
+                            AI</span><span>OpenCV</span>
+                    </div>
+                </div>
+
+                <div class="skill-category glass-card reveal">
+                    <div class="skill-icon"><i data-lucide="bar-chart-2"></i></div>
+                    <h3>Data Science</h3>
+                    <div class="skill-tags">
+                        <span>Pandas</span><span>NumPy</span><span>Power BI</span><span>Tableau</span>
+                    </div>
+                </div>
+
+                <div class="skill-category glass-card reveal">
+                    <div class="skill-icon"><i data-lucide="server"></i></div>
+                    <h3>Backend & Frameworks</h3>
+                    <div class="skill-tags">
+                        <span>Django</span><span>FastAPI</span><span>Next.js</span><span>RESTful APIs</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Education & Achievements</h2>
+            <div class="flex-layout">
+                <div class="edu-column">
+                    <div class="edu-card glass-card reveal">
+                        <h3>MSc Computer Science <span class="highlight">(Distinction)</span></h3>
+                        <h4>Anglia Ruskin University, Cambridge, UK</h4>
+                        <p class="date">Sep 2024 – Oct 2025</p>
+                        <p class="modules">Key Modules: Machine Learning in Finance, AI for Imaging, Semantic Web
+                            Technologies, Cybersecurity and AI.</p>
+                    </div>
+                    <div class="edu-card glass-card reveal">
+                        <h3>BSc Computer Applications <span class="highlight">(First Class)</span></h3>
+                        <h4>St. Xavier’s College, Ahmedabad, India</h4>
+                        <p class="date">May 2021 – May 2024</p>
+                    </div>
+                </div>
+                <div class="achievements-column reveal">
+                    <div class="glass-card achievements-card">
+                        <h3><i data-lucide="award"></i> Top Highlights</h3>
+                        <ul>
+                            <li>Achieved Distinction in MSc Computer Science (top 10% class ranking).</li>
+                            <li>Selected by Klip Global to lead an industrial research project integrating AI with
+                                wellbeing analytics.</li>
+                            <li>Published and presented university research on Quantum AI and Mental Health Technology.
+                            </li>
+                            <li>Acted as Team Lead for four cross-functional AI & web development projects at ARU.</li>
+                            <li>Received recognition for innovation in AI-based health technology from faculty mentors.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Certifications</h2>
+            <div class="certificates-grid">
+
+                <a href="data/IIT%20karan.pdf" target="_blank" class="cert-link">
+                    <div class="certificate-card glass-card reveal">
+                        <div class="cert-icon"><i data-lucide="graduation-cap"></i></div>
+                        <p class="cert-name">AI & ML using Python</p>
+                        <p class="cert-issuer">IIT Madras (Score: 86%)</p>
+                    </div>
+                </a>
+
+                <a href="data/AWS.pdf" target="_blank" class="cert-link">
+                    <div class="certificate-card glass-card reveal" style="transition-delay: 100ms;">
+                        <div class="cert-icon"><i data-lucide="cloud"></i></div>
+                        <p class="cert-name">AWS Cloud Practitioner</p>
+                        <p class="cert-issuer">AWS</p>
+                    </div>
+                </a>
+
+                <a href="data/IBM.pdf" target="_blank" class="cert-link">
+                    <div class="certificate-card glass-card reveal" style="transition-delay: 100ms;">
+                        <div class="cert-icon"><i data-lucide="award"></i></div>
+                        <p class="cert-name">Python for Data Science</p>
+                        <p class="cert-issuer">IBM</p>
+                    </div>
+                </a>
+
+                <a href="data/BCG%20GENAI.pdf" target="_blank" class="cert-link">
+                    <div class="certificate-card glass-card reveal" style="transition-delay: 200ms;">
+                        <div class="cert-icon"><i data-lucide="brain"></i></div>
+                        <p class="cert-name">Generative AI</p>
+                        <p class="cert-issuer">BCG</p>
+                    </div>
+                </a>
+
+                <a href="data/TATA%20GENAI.pdf" target="_blank" class="cert-link">
+                    <div class="certificate-card glass-card reveal" style="transition-delay: 300ms;">
+                        <div class="cert-icon"><i data-lucide="cpu"></i></div>
+                        <p class="cert-name">Generative AI</p>
+                        <p class="cert-issuer">TATA Consultancy</p>
+                    </div>
+                </a>
+
+                <a href="data/JP%20MORGAN.pdf" target="_blank" class="cert-link">
+                    <div class="certificate-card glass-card reveal">
+                        <div class="cert-icon"><i data-lucide="code-2"></i></div>
+                        <p class="cert-name">Software Engineering</p>
+                        <p class="cert-issuer">JPMorgan Chase</p>
+                    </div>
+                </a>
+
+                <a href="data/ACCENATURE.pdf" target="_blank" class="cert-link">
+                    <div class="certificate-card glass-card reveal" style="transition-delay: 100ms;">
+                        <div class="cert-icon"><i data-lucide="bar-chart"></i></div>
+                        <p class="cert-name">Data Analytics & Viz</p>
+                        <p class="cert-issuer">Accenture</p>
+                    </div>
+                </a>
+
+                <a href="data/FORD.pdf" target="_blank" class="cert-link">
+                    <div class="certificate-card glass-card reveal" style="transition-delay: 200ms;">
+                        <div class="cert-icon"><i data-lucide="car"></i></div>
+                        <p class="cert-name">AI Fundamentals</p>
+                        <p class="cert-issuer">Ford</p>
+                    </div>
+                </a>
+
+                <a href="data/BANK%20OF%20AMERICA.pdf" target="_blank" class="cert-link">
+                    <div class="certificate-card glass-card reveal" style="transition-delay: 300ms;">
+                        <div class="cert-icon"><i data-lucide="briefcase"></i></div>
+                        <p class="cert-name">Virtual Experience</p>
+                        <p class="cert-issuer">Bank of America</p>
+                    </div>
+                </a>
+
+                <a href="data/QUNATIUM.pdf" target="_blank" class="cert-link">
+                    <div class="certificate-card glass-card reveal">
+                        <div class="cert-icon"><i data-lucide="database"></i></div>
+                        <p class="cert-name">Data Analytics</p>
+                        <p class="cert-issuer">Quantium</p>
+                    </div>
+                </a>
+
+                <a href="data/BRITISH%20AIRWAYS.pdf" target="_blank" class="cert-link">
+                    <div class="certificate-card glass-card reveal" style="transition-delay: 100ms;">
+                        <div class="cert-icon"><i data-lucide="plane"></i></div>
+                        <p class="cert-name">Cybersecurity</p>
+                        <p class="cert-issuer">British Airways</p>
+                    </div>
+                </a>
+
+                <a href="data/LLYODS%20BANK%20TECH.pdf" target="_blank" class="cert-link">
+                    <div class="certificate-card glass-card reveal" style="transition-delay: 200ms;">
+                        <div class="cert-icon"><i data-lucide="lightbulb"></i></div>
+                        <p class="cert-name">Tech & Innovation</p>
+                        <p class="cert-issuer">Lloyds Bank</p>
+                    </div>
+                </a>
+
+                <a href="data/TATA.pdf" target="_blank" class="cert-link">
+                    <div class="certificate-card glass-card reveal" style="transition-delay: 300ms;">
+                        <div class="cert-icon"><i data-lucide="pie-chart"></i></div>
+                        <p class="cert-name">Data Visualization</p>
+                        <p class="cert-issuer">TATA</p>
+                    </div>
+                </a>
+
+
+
+                <div class="certificate-card glass-card reveal" style="transition-delay: 100ms;">
+                    <div class="cert-icon"><i data-lucide="binary"></i></div>
+                    <p class="cert-name">Quantum Computing Fundamentals</p>
+                    <p class="cert-issuer">IBM Qiskit</p>
+                </div>
+
+                <div class="certificate-card glass-card reveal" style="transition-delay: 200ms;">
+                    <div class="cert-icon"><i data-lucide="network"></i></div>
+                    <p class="cert-name">Advanced Deep Learning</p>
+                    <p class="cert-issuer">Coursera</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Strengths Section -->
+    <section id="strengths" class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Professional Strengths</h2>
+            <div class="projects-grid">
+                <div class="glass-card reveal">
+                    <p class="desc" style="color: var(--text-primary); font-size: 1.1rem;">
+                        <i data-lucide="check-circle" style="color: var(--accent-light); margin-right: 10px;"></i>
+                        Deep expertise in applied machine learning, NLP, and quantum computing with strong mathematical
+                        background.
+                    </p>
+                </div>
+                <div class="glass-card reveal" style="transition-delay: 100ms;">
+                    <p class="desc" style="color: var(--text-primary); font-size: 1.1rem;">
+                        <i data-lucide="check-circle" style="color: var(--accent-light); margin-right: 10px;"></i>
+                        Excellent communicator skilled in translating complex data insights into actionable business
+                        strategies.
+                    </p>
+                </div>
+                <div class="glass-card reveal" style="transition-delay: 200ms;">
+                    <p class="desc" style="color: var(--text-primary); font-size: 1.1rem;">
+                        <i data-lucide="check-circle" style="color: var(--accent-light); margin-right: 10px;"></i>
+                        Passionate about ethical AI, inclusivity, and deploying human-centric intelligent systems.
+                    </p>
+                </div>
+                <div class="glass-card reveal" style="transition-delay: 300ms;">
+                    <p class="desc" style="color: var(--text-primary); font-size: 1.1rem;">
+                        <i data-lucide="check-circle" style="color: var(--accent-light); margin-right: 10px;"></i>
+                        Adaptable to fast-paced environments with strong teamwork, leadership, and research skills.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2025 Karan Panwar. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/karan-panwar-1b9b6a26b/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://github.com/karanpanwar8595" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // --- Splash Screen ---
+        window.addEventListener('load', () => {
+            const splashScreen = document.getElementById('splash-screen');
+
+            // Allow animation to finish
+            setTimeout(() => {
+                splashScreen.style.opacity = '0';
+                setTimeout(() => {
+                    splashScreen.style.display = 'none';
+                }, 500); // Wait for transition
+            }, 1400); // 1.4s splash duration
+        });
+
+
+        // --- Sticky Navbar & Scroll Styling ---
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+
+        // --- Scroll Reveal Animation ---
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Optional: observer.unobserve(entry.target); // If want to play only once
+                }
+            });
+        };
+
+        const revealOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+        revealElements.forEach(el => revealObserver.observe(el));
+
+
+        // --- Futuristic Animated Background (Particles & Mesh) ---
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let particles = [];
+
+        // Handle resizing
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            initParticles();
+        }
+
+        window.addEventListener('resize', resize);
+
+        // Particle Configuration
+        const isMobile = window.innerWidth < 768;
+        const PARTICLE_COUNT = isMobile ? 30 : 70; // Cap limit for mobile performance
+        const MAX_CONNECTION_DISTANCE = 150;
+        const PARTICLE_SPEED_BASE = 0.5;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * PARTICLE_SPEED_BASE;
+                this.vy = (Math.random() - 0.5) * PARTICLE_SPEED_BASE;
+                this.radius = Math.random() * 1.5 + 0.5;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Wrap around screen
+                if (this.x < 0) this.x = width;
+                if (this.x > width) this.x = 0;
+                if (this.y < 0) this.y = height;
+                if (this.y > height) this.y = 0;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(139, 92, 246, 0.4)'; // Subtle purple
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            // Clear with a slight fade effect to create trails (optional, omitted here for clean futuristic look)
+            ctx.clearRect(0, 0, width, height);
+
+            // Draw dark radial gradient background
+            const bgGradient = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, width * 0.8);
+            bgGradient.addColorStop(0, 'rgba(15, 10, 25, 1)');
+            bgGradient.addColorStop(1, 'rgba(5, 5, 5, 1)');
+            ctx.fillStyle = bgGradient;
+            ctx.fillRect(0, 0, width, height);
+
+            // Update & draw particles and connecting lines
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < MAX_CONNECTION_DISTANCE) {
+                        // Opacity inversely proportional to distance
+                        const opacity = (1 - (distance / MAX_CONNECTION_DISTANCE)) * 0.15;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(139, 92, 246, ${opacity})`;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Add a very faint glow effect tracking center screen (parallax optional)
+
+            requestAnimationFrame(animate);
+        }
+
+        // Respect user preference for reduced motion
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        if (!prefersReducedMotion.matches) {
+            resize();
+            animate();
+        } else {
+            // Just draw static gradient background
+            resize();
+            const bgGradient = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, width * 0.8);
+            bgGradient.addColorStop(0, 'rgba(15, 10, 25, 1)');
+            bgGradient.addColorStop(1, 'rgba(5, 5, 5, 1)');
+            ctx.fillStyle = bgGradient;
+            ctx.fillRect(0, 0, width, height);
+        }
+    </script>
+</body>
+
+</html>

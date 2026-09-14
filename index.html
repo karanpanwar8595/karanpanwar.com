@@ -1564,11 +1564,227 @@
                 display: none;
             }
         }
+
+        /* Refined visual system */
+        :root {
+            --bg-color: #101416;
+            --bg-secondary: #172022;
+            --text-primary: #f4f1e8;
+            --text-secondary: #a8b2ae;
+            --accent-color: #f07c5a;
+            --accent-light: #ffc28f;
+            --accent-glow: rgba(240, 124, 90, 0.3);
+            --glass-bg: rgba(24, 34, 35, 0.72);
+            --glass-border: rgba(255, 238, 211, 0.14);
+            --font-sans: 'DM Sans', sans-serif;
+            --font-display: 'Space Grotesk', sans-serif;
+        }
+
+        body {
+            background: var(--bg-color);
+            background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+            background-size: 54px 54px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 82% 12%, rgba(240, 124, 90, 0.13), transparent 30%),
+                radial-gradient(circle at 12% 78%, rgba(82, 176, 163, 0.1), transparent 28%);
+            z-index: -2;
+        }
+
+        #bg-canvas { opacity: 0.5; mix-blend-mode: screen; }
+        .container { max-width: 1160px; }
+        .section { padding: 7rem 0; }
+        #navbar { padding: 1.25rem 0; }
+        #navbar.scrolled { background: rgba(16, 20, 22, 0.82); border-bottom-color: rgba(255, 238, 211, 0.12); }
+        .logo { color: var(--accent-light); background: none; -webkit-text-fill-color: currentColor; letter-spacing: 1px; }
+        .nav-links { gap: 1.6rem; }
+        .nav-links a { color: #b9c1bc; font-size: 0.82rem; letter-spacing: 0.04em; }
+        .nav-links a::after { background: var(--accent-color); }
+
+        .hero { min-height: 92vh; padding-top: 6rem; }
+        .hero::before { top: 2%; right: -15%; width: 620px; height: 620px; background: radial-gradient(circle, rgba(240, 124, 90, 0.18), transparent 68%); filter: blur(30px); }
+        .hero::after { bottom: -20%; left: -12%; width: 560px; height: 560px; background: radial-gradient(circle, rgba(82, 176, 163, 0.13), transparent 68%); filter: blur(36px); }
+        .hero-text { max-width: 760px; }
+        .greeting { color: var(--accent-light); font-size: 0.9rem; letter-spacing: 0.18em; }
+        .name { font-size: clamp(4rem, 10.5vw, 8.3rem); letter-spacing: -0.08em; line-height: 0.9; color: #fff8ec; text-shadow: 0 12px 35px rgba(0, 0, 0, 0.28); animation: nameFloatGlow 5s ease-in-out infinite; }
+        .name::before, .name::after { display: none; }
+        .title { max-width: 680px; color: #d5ddd7; background: none; -webkit-text-fill-color: currentColor; font-size: clamp(1.35rem, 3vw, 2.2rem); letter-spacing: -0.03em; }
+        .title::after { background: var(--accent-color); box-shadow: none; height: 3px; }
+        .summary { max-width: 660px; font-size: 1rem; color: #aeb9b4; }
+        .summary::before { background: linear-gradient(180deg, var(--accent-color), #52b0a3, transparent); }
+
+        .btn { border-radius: 8px; padding: 0.9rem 1.25rem; font-size: 0.9rem; letter-spacing: 0.01em; }
+        .btn-primary { background: var(--accent-color); color: #1c1714; box-shadow: 0 10px 30px rgba(240, 124, 90, 0.2); animation: none; }
+        .btn-primary:hover { background: #ff9a73; box-shadow: 0 14px 34px rgba(240, 124, 90, 0.3); }
+        .btn-secondary { border: 1px solid rgba(255, 238, 211, 0.32); margin-left: 0.6rem; }
+        .btn-secondary:hover { border-color: var(--accent-light); color: var(--accent-light); background: rgba(255, 194, 143, 0.08); box-shadow: none; }
+        .social-links { gap: 0.7rem; }
+        .social-links a { width: 38px; height: 38px; border-radius: 9px; background: rgba(82, 176, 163, 0.1); color: #8fcac0; }
+        .social-links a:hover { color: #d7fff6; background: rgba(82, 176, 163, 0.2); box-shadow: 0 8px 20px rgba(82, 176, 163, 0.18); }
+        .scroll-indicator .mouse { border-color: #8fcac0; }
+        .scroll-indicator .mouse::before { background: #8fcac0; }
+
+        .section-title { color: #f4f1e8; font-size: clamp(2rem, 5vw, 3.25rem); letter-spacing: -0.04em; text-transform: none; text-shadow: none; background: none; -webkit-text-fill-color: currentColor; }
+        .section-title::before { display: none; }
+        .section-title::after { width: 56px; height: 3px; bottom: -14px; background: var(--accent-color); box-shadow: none; }
+        .glass-card { background: linear-gradient(145deg, rgba(31, 43, 43, 0.78), rgba(21, 29, 30, 0.7)); border: 1px solid rgba(255, 238, 211, 0.13); border-radius: 12px; box-shadow: 0 18px 45px rgba(0, 0, 0, 0.16); }
+        .glass-card::before { background: radial-gradient(circle, rgba(240, 124, 90, 0.1), transparent 68%); }
+        .glass-card:hover { border-color: rgba(240, 124, 90, 0.42); box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25); animation: none; }
+        .timeline::before { background: linear-gradient(180deg, rgba(240, 124, 90, 0.6), rgba(82, 176, 163, 0.1), transparent); }
+        .timeline-dot { background: var(--accent-color); animation: none; }
+        .timeline-item:hover .timeline-dot { background: var(--accent-light); box-shadow: 0 0 20px var(--accent-glow); }
+        .timeline-header h4, .tagline, .highlight { color: var(--accent-light); }
+        .timeline-bullets li::before { color: var(--accent-color); }
+        .project-card h3 { background: none; -webkit-text-fill-color: currentColor; color: var(--text-primary); }
+        .project-card:hover h3, .timeline-item:hover .timeline-header h3 { color: var(--accent-light); }
+        .tech-stack span { background: rgba(82, 176, 163, 0.08); color: #9ad8ce; border-color: rgba(82, 176, 163, 0.2); border-radius: 6px; }
+        .tech-stack span:hover { background: rgba(82, 176, 163, 0.16); border-color: #8fcac0; box-shadow: none; }
+        .skill-icon { background: rgba(240, 124, 90, 0.1); color: var(--accent-light); border-radius: 10px; }
+        .skill-category:hover .skill-icon { background: rgba(240, 124, 90, 0.2); box-shadow: none; }
+        .skill-tags span { border-radius: 5px; }
+        .skill-tags span:hover { background: rgba(240, 124, 90, 0.12); border-color: var(--accent-light); color: var(--accent-light); }
+        .cert-icon { background: rgba(82, 176, 163, 0.12); color: #9ad8ce; }
+        .certificate-card:hover { border-color: rgba(240, 124, 90, 0.45); }
+        .cert-name { color: var(--text-primary); }
+        .certificate-card:hover .cert-name, .achievements-card h3 { color: var(--accent-light); }
+        .achievements-card li::before { color: var(--accent-color); }
+        footer { border-top-color: rgba(255, 238, 211, 0.12); }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 1.25rem; }
+            .section { padding: 5rem 0; }
+            .hero { min-height: 88vh; padding-top: 5rem; }
+            .name { font-size: clamp(3.6rem, 18vw, 6rem); }
+            .hero-cta { align-items: stretch; }
+            .hero-cta .btn { justify-content: center; width: min(100%, 290px); }
+            .btn-secondary { margin-left: 0; }
+            .scroll-indicator { display: none; }
+            .timeline::before { left: 9px; }
+            .timeline-item { padding-left: 34px; }
+            .timeline-dot { left: 0; width: 18px; height: 18px; }
+            .timeline-header { gap: 0.55rem; }
+            .timeline-header h3 { font-size: 1.12rem; }
+            .date { font-size: 0.78rem; }
+            .projects-grid, .certificates-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .flex-layout { gap: 1rem; }
+            .footer-content { align-items: flex-start; flex-direction: column; gap: 1rem; }
+            .nav-links { position: absolute; top: calc(100% + 0.75rem); left: 1.25rem; right: 1.25rem; display: flex; flex-direction: column; gap: 0; padding: 0.4rem; border: 1px solid var(--glass-border); border-radius: 12px; background: rgba(20, 28, 29, 0.96); backdrop-filter: blur(18px); opacity: 0; pointer-events: none; transform: translateY(-8px); transition: opacity 0.25s ease, transform 0.25s ease; }
+            .nav-links.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+            .nav-links a { padding: 0.75rem 0.8rem; }
+            .hamburger { display: flex; color: var(--accent-light); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+        }
+
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 1rem;
+            border: 1px solid rgba(255, 238, 211, 0.2);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--accent-light);
+            cursor: pointer;
+            transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(12deg) scale(1.08);
+            background: rgba(240, 124, 90, 0.14);
+            border-color: var(--accent-light);
+        }
+
+        .theme-toggle .sun-icon { display: none; }
+        .theme-toggle .moon-icon { display: block; }
+
+        html.light-mode {
+            --bg-color: #f4f0e8;
+            --bg-secondary: #e8e2d7;
+            --text-primary: #1c2928;
+            --text-secondary: #53625f;
+            --accent-color: #c9573c;
+            --accent-light: #a3422e;
+            --accent-glow: rgba(201, 87, 60, 0.25);
+            --glass-bg: rgba(255, 255, 255, 0.72);
+            --glass-border: rgba(28, 41, 40, 0.14);
+        }
+
+        html.light-mode body {
+            background-color: var(--bg-color);
+            background-image: linear-gradient(rgba(28, 41, 40, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(28, 41, 40, 0.05) 1px, transparent 1px), linear-gradient(118deg, transparent 0 67%, rgba(211, 115, 72, 0.08) 67% 82%, transparent 82%);
+        }
+
+        html.light-mode body::before {
+            background: linear-gradient(118deg, rgba(82, 176, 163, 0.12), transparent 26%), linear-gradient(295deg, rgba(240, 124, 90, 0.13), transparent 32%);
+        }
+
+        html.light-mode #navbar.scrolled { background: rgba(244, 240, 232, 0.86); border-bottom-color: rgba(28, 41, 40, 0.12); }
+        html.light-mode .nav-links a { color: #53625f; }
+        html.light-mode .name {
+            color: transparent;
+            background: linear-gradient(110deg, #153b39 0%, #153b39 42%, #b94e37 72%, #d37348 100%);
+            background-size: 160% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: none;
+            animation: lightNameShift 8s ease-in-out infinite;
+        }
+        html.light-mode .section-title { color: #153b39; }
+        html.light-mode .title { color: #284844; }
+        html.light-mode .summary { color: #53625f; }
+        html.light-mode .glass-card { background: linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(239, 234, 224, 0.76)); border-color: rgba(28, 41, 40, 0.13); box-shadow: 0 18px 45px rgba(72, 61, 48, 0.1); }
+        html.light-mode .glass-card:hover { border-color: rgba(201, 87, 60, 0.45); box-shadow: 0 18px 45px rgba(72, 61, 48, 0.16); }
+        html.light-mode .btn-secondary { color: #1c2928; border-color: rgba(28, 41, 40, 0.35); }
+        html.light-mode .btn-secondary:hover { color: var(--accent-light); border-color: var(--accent-light); }
+        html.light-mode .social-links a { color: #277c71; background: rgba(82, 176, 163, 0.12); }
+        html.light-mode .skill-tags span { background: rgba(28, 41, 40, 0.04); color: #53625f; border-color: rgba(28, 41, 40, 0.12); }
+        html.light-mode footer { border-top-color: rgba(28, 41, 40, 0.14); }
+        html.light-mode .theme-toggle { background: rgba(28, 41, 40, 0.06); border-color: rgba(28, 41, 40, 0.18); }
+        html.light-mode .theme-toggle .sun-icon { display: block; }
+        html.light-mode .theme-toggle .moon-icon { display: none; }
+
+        html:not(.light-mode) .name {
+            color: #f07c5a;
+            text-shadow: 0 10px 32px rgba(240, 124, 90, 0.22);
+            animation: darkNamePulse 5s ease-in-out infinite;
+        }
+
+        @keyframes darkNamePulse {
+            0%, 100% {
+                color: #f07c5a;
+                text-shadow: 0 10px 32px rgba(240, 124, 90, 0.2);
+            }
+            50% {
+                color: #ff9a73;
+                text-shadow: 0 12px 38px rgba(240, 124, 90, 0.34);
+            }
+        }
+
+        @keyframes lightNameShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @media (max-width: 768px) {
+            .theme-toggle { margin-left: 0.45rem; width: 38px; height: 38px; }
+        }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -1602,6 +1818,10 @@
             <div class="hamburger">
                 <i data-lucide="menu"></i>
             </div>
+            <button class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch theme">
+                <i class="sun-icon" data-lucide="sun"></i>
+                <i class="moon-icon" data-lucide="moon"></i>
+            </button>
         </div>
     </nav>
 
@@ -2123,6 +2343,36 @@ Applied AI engineer and researcher focused on <b>Machine Learning, Generative AI
         // Initialize Lucide Icons
         lucide.createIcons();
 
+        // Restore and persist the user's preferred color scheme.
+        const themeToggle = document.querySelector('.theme-toggle');
+        const savedTheme = localStorage.getItem('portfolio-theme');
+        if (savedTheme === 'light') {
+            document.documentElement.classList.add('light-mode');
+        }
+
+        function updateThemeLabel() {
+            const isLight = document.documentElement.classList.contains('light-mode');
+            themeToggle?.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+        }
+
+        updateThemeLabel();
+        themeToggle?.addEventListener('click', () => {
+            const isLight = document.documentElement.classList.toggle('light-mode');
+            localStorage.setItem('portfolio-theme', isLight ? 'light' : 'dark');
+            updateThemeLabel();
+        });
+
+        // Toggle the compact navigation on smaller screens.
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger?.addEventListener('click', () => {
+            navLinks?.classList.toggle('open');
+        });
+
+        navLinks?.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('open'));
+        });
+
         // --- Splash Screen ---
         window.addEventListener('load', () => {
             const splashScreen = document.getElementById('splash-screen');
@@ -2219,7 +2469,8 @@ Applied AI engineer and researcher focused on <b>Machine Learning, Generative AI
                 this.vy = (Math.random() - 0.5) * PARTICLE_SPEED_BASE;
                 this.radius = Math.random() * 1.5 + 0.5;
                 this.angle = Math.random() * Math.PI * 2;
-                this.color = `hsl(${Math.random() * 60 + 250}, 100%, ${Math.random() * 30 + 50}%)`;
+                const palette = ['#f07c5a', '#ffc28f', '#52b0a3', '#9ad8ce'];
+                this.color = palette[Math.floor(Math.random() * palette.length)];
             }
 
             update() {
@@ -2262,9 +2513,9 @@ Applied AI engineer and researcher focused on <b>Machine Learning, Generative AI
 
             // Draw dark radial gradient background with animated effect
             const bgGradient = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, width * 0.8);
-            bgGradient.addColorStop(0, 'rgba(25, 15, 45, 1)');
-            bgGradient.addColorStop(0.5, 'rgba(10, 5, 20, 1)');
-            bgGradient.addColorStop(1, 'rgba(5, 5, 5, 1)');
+            bgGradient.addColorStop(0, 'rgba(28, 43, 42, 0.95)');
+            bgGradient.addColorStop(0.5, 'rgba(16, 25, 27, 0.98)');
+            bgGradient.addColorStop(1, 'rgba(10, 14, 15, 1)');
             ctx.fillStyle = bgGradient;
             ctx.fillRect(0, 0, width, height);
 
@@ -2288,8 +2539,8 @@ Applied AI engineer and researcher focused on <b>Machine Learning, Generative AI
                             particles[i].x, particles[i].y,
                             particles[j].x, particles[j].y
                         );
-                        gradient.addColorStop(0, `rgba(167, 139, 250, ${opacity})`);
-                        gradient.addColorStop(1, `rgba(139, 92, 246, ${opacity * 0.5})`);
+                        gradient.addColorStop(0, `rgba(240, 124, 90, ${opacity})`);
+                        gradient.addColorStop(1, `rgba(82, 176, 163, ${opacity * 0.5})`);
                         
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
@@ -2307,8 +2558,8 @@ Applied AI engineer and researcher focused on <b>Machine Learning, Generative AI
                     window.lastMouseX, window.lastMouseY, 0,
                     window.lastMouseX, window.lastMouseY, 300
                 );
-                glowGradient.addColorStop(0, 'rgba(139, 92, 246, 0.15)');
-                glowGradient.addColorStop(1, 'rgba(139, 92, 246, 0)');
+                glowGradient.addColorStop(0, 'rgba(240, 124, 90, 0.12)');
+                glowGradient.addColorStop(1, 'rgba(240, 124, 90, 0)');
                 ctx.fillStyle = glowGradient;
                 ctx.fillRect(
                     window.lastMouseX - 300,
